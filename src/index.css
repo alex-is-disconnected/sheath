@@ -63,8 +63,14 @@ main {
 }
 
 #cicada {
-  font-size: 11px;
-  line-height: .15;
+  font-size: 16px;
+  line-height: 1.1;
+  background-color: black;
+  font-family: 'JetBrains Mono';
+}
+
+#cicada > p {
+  margin: 0;
 }
 
 #button1 {
