@@ -26,7 +26,8 @@ export default class AsciiEffect {
 
 		const domElement = document.createElement( 'div' );
 		domElement.style.cursor = 'default';
-
+		domElement.id = 'ascii-wrapper';
+		domElement.style.opacity = '0'
 		const oAscii = document.createElement( 'table' );
 		domElement.appendChild( oAscii );
 
@@ -59,8 +60,8 @@ export default class AsciiEffect {
 
 		function initAsciiSize() {
 
-			iWidth = Math.floor( (width * fResolution ) * .6);
-			iHeight = Math.floor( (width * fResolution) * .6 * .6);
+			iWidth = Math.floor( (width * fResolution ) * .65);
+			iHeight = Math.floor( (width * fResolution) * .6 * .63);
 
 			oCanvas.width = iWidth;
 			oCanvas.height = iHeight;
@@ -82,7 +83,7 @@ export default class AsciiEffect {
 
 			const oStyle = oAscii.style;
 			oStyle.whiteSpace = 'pre';
-			oStyle.margin = '20vh 0px';
+			oStyle.margin = '16vh 0px';
 			oStyle.padding = '0px';
 			oStyle.letterSpacing = fLetterSpacing + 'px';
 			oStyle.fontFamily = strFont;
@@ -91,7 +92,7 @@ export default class AsciiEffect {
 			oStyle.textAlign = 'center';
 			oStyle.textDecoration = 'none';
       oStyle.fontWeight = '100'
-
+			oStyle.width= '600px';
 		}
 
 
@@ -108,7 +109,7 @@ export default class AsciiEffect {
 
 		}
 
-		const oCtx = oCanvas.getContext( '2d' );
+		const oCtx = oCanvas.getContext( '2d', { willReadFrequently: true } );
 		if ( ! oCtx.getImageData ) {
 
 			return;

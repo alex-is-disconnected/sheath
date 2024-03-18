@@ -10,13 +10,15 @@ if (require('electron-squirrel-startup')) {
   app.quit();
 }
 
+
+
 let mainWindow;
 
 const createWindow = () => {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 1000,
-    height: 600,
+    width: 1100,
+    height: 650,
     autoHideMenuBar: true,
     frame: false,
     webPreferences: {
@@ -97,6 +99,12 @@ const nfc = new NFC();
 
 nfc.on("reader", async (reader) => {
   console.log(`device attached`, reader);
+
+  ipcMain.handle('get-reader', (event, args) => {
+    const stringyReader = JSON.stringify(reader)
+    return stringyReader;
+  });
+
   // we have to handle MIFARE DESFire
   reader.autoProcessing = false;
 
@@ -114,9 +122,12 @@ nfc.on("reader", async (reader) => {
   };
 
 
+  reader.on('card.off', async () => {
+    mainWindow.webContents.send('card-removed', 'card removed!');
+  })
+
   reader.on("card", async (card) => {
-    console.log(`card detected`, reader, card);
-    mainWindow.webContents.send('reader-connected', 'card connected!');
+    mainWindow.webContents.send('card-detected', 'card detected!');
 
     const selectApplication = async () => {
       // 1: [0x5A] SelectApplication(appId) [4 bytes] - Selects one specific application for further access
@@ -200,7 +211,9 @@ nfc.on("reader", async (reader) => {
       // The encoded result is already a Uint8Array
       return encoded;
     }
+
     const chunkLength = 40;
+    
     function chunkString(str) {
       const result = [];
       for (let i = 0; i < str.length; i += chunkLength) {
@@ -343,9 +356,6 @@ nfc.on("reader", async (reader) => {
       // step 2
       const key = Buffer.from(desfire.key, "hex");
       await authenticate(key);
-
-      // step 3
-      await readData();
 
     } catch (err) {
       console.error(`error occurred during processing steps`, reader, err);
