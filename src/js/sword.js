@@ -63,14 +63,14 @@ window.NFC.onCardRemoved((event, data) => {
   swordDetectedReader.style.display = 'none';
 })
 
-window.NFC.getReader().then((data) => {
-  swordDetectedReader.style.display = 'block';
-  const readerJSON = JSON.parse(data)
-  swordDetectedReader.innerHTML = `
-  <span class="black-highlight">READER DETECTED:</span><br><br>
-  <span class="black-highlight"> ${readerJSON.reader.name}</span>
-  `
-});
+// window.NFC.getReader().then((data) => {
+//   swordDetectedReader.style.display = 'block';
+//   const readerJSON = JSON.parse(data)
+//   swordDetectedReader.innerHTML = `
+//   <span class="black-highlight">READER DETECTED:</span><br><br>
+//   <span class="black-highlight"> ${readerJSON.reader.name}</span>
+//   `
+// });
 
 window.NFC.onReaderConnected((event, data) => {
   const readerJSON = JSON.parse(data)
@@ -84,20 +84,20 @@ window.NFC.onReaderConnected((event, data) => {
 
 swordBtn.addEventListener('click', () => {
   swordParent.style.display = 'block'
-  window.NFC.getReader().then((data) => {
+  // window.NFC.getReader().then((data) => {
     swordDetectedReader.style.display = 'block';
-    const readerJSON = JSON.parse(data)
-    swordDetectedReader.innerHTML = `
-    <span class="black-highlight">READER DETECTED:</span><br><br>
-    <span class="black-highlight"> ${readerJSON.reader.name}</span>
-    `
+    // const readerJSON = JSON.parse(data)
+    // swordDetectedReader.innerHTML = `
+    // <span class="black-highlight">READER DETECTED:</span><br><br>
+    // <span class="black-highlight"> ${readerJSON.reader.name}</span>
+    // `
     const swordDetectReaderTS = new TypeShuffle(swordDetectedReader)
     swordDetectReaderTS.clearCells();
     setTimeout(() => {
       
       swordDetectReaderTS.trigger('fx6')
     }, 500);
-  });
+  // });
 })
 
 encodeTextArea.addEventListener("input", function(event) {

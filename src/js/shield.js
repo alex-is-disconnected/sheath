@@ -44,6 +44,30 @@ window.NFC.onCardDetected((event, data) => {
   shieldDetectedReader.style.display = 'none';
 })
 
+document.addEventListener('keyup', function(event) {
+  if (event.key === 'h' || event.key === 'H') {
+    shieldDetectedCard.style.display = 'block';
+    shieldRemovedCard.style.display = 'none';
+  
+    readBtn.style.opacity = 1;
+    shieldCardTS.trigger('reader');
+    shieldDetectedTS.trigger('fx6');
+    shieldDetectedReader.style.display = 'none';
+  }
+});
+
+document.addEventListener('keyup', function(event) {
+  if (event.key === 'k' || event.key === 'K') {
+    shieldRemovedCard.style.display = 'block';
+    shieldDetectedCard.style.display = 'none';
+  
+    shieldCardTS.trigger('clear-reader');
+    readBtn.style.opacity = 0;
+    shieldRemovedTS.trigger('fx6');
+    shieldDetectedReader.style.display = 'none';
+  }
+});
+
 window.NFC.onCardRemoved((event, data) => {
   shieldRemovedCard.style.display = 'block';
   shieldDetectedCard.style.display = 'none';
@@ -54,16 +78,16 @@ window.NFC.onCardRemoved((event, data) => {
   shieldDetectedReader.style.display = 'none';
 })
 
-window.NFC.getReader().then((data) => {
-  shieldDetectedReader.style.display = 'block';
-  const readerJSON = JSON.parse(data)
-  shieldDetectedReader.innerHTML = `
-  <span class="black-highlight">READER DETECTED:</span><br><br>
-  <span class="black-highlight"> ${readerJSON.reader.name}</span>
-  `
-  const shieldDetectReaderTS = new TypeShuffle(shieldDetectedReader)
-  shieldDetectReaderTS.trigger('fx6');
-});
+// window.NFC.getReader().then((data) => {
+//   shieldDetectedReader.style.display = 'block';
+//   const readerJSON = JSON.parse(data)
+//   shieldDetectedReader.innerHTML = `
+//   <span class="black-highlight">READER DETECTED:</span><br><br>
+//   <span class="black-highlight"> ${readerJSON.reader.name}</span>
+//   `
+//   const shieldDetectReaderTS = new TypeShuffle(shieldDetectedReader)
+//   shieldDetectReaderTS.trigger('fx6');
+// });
 
 window.NFC.onReaderConnected((event, data) => {
   const readerJSON = JSON.parse(data)
@@ -75,12 +99,11 @@ window.NFC.onReaderConnected((event, data) => {
   shieldDetectReaderTS.trigger('fx6');
 })
 
-
 shieldBtn.addEventListener('click', () => {
   shieldParent.style.display = 'block'
-  window.NFC.getReader().then((data) => {
+  // window.NFC.getReader().then((data) => {
     shieldDetectedReader.style.display = 'block';
-    const readerJSON = JSON.parse(data)
+    // const readerJSON = JSON.parse(tempData)
     // shieldDetectedReader.innerHTML = `
     // <span class="black-highlight">READER DETECTED:</span><br><br>
     // <span class="black-highlight"> ${readerJSON.reader.name}</span>
@@ -91,7 +114,7 @@ shieldBtn.addEventListener('click', () => {
       
       shieldDetectReaderTS.trigger('fx6')
     }, 500);
-  });
+  // });
 })
 
 

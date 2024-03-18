@@ -9,7 +9,7 @@ contextBridge.exposeInMainWorld('windowControls', {
 })
 
 contextBridge.exposeInMainWorld('NFC', {
-  getReader: () => ipcRenderer.invoke('get-reader'),
+  getReader: () => {return 'Hi'},
   onReaderConnected: (callback) => ipcRenderer.on('reader-connected', (_event, data) => callback(data)),
   onCardDetected: (callback) => ipcRenderer.on('card-detected', callback),
   onCardRemoved: (callback) => ipcRenderer.on('card-removed', callback),

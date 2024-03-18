@@ -50,7 +50,7 @@ function init() {
   mesh = new THREE.Mesh(geometry, material);
   scene.add(mesh);
 
-  rectGeo = new THREE.PlaneGeometry(205, 160); // Width and height of the rectangle
+  rectGeo = new THREE.PlaneGeometry(205, window.innerHeight * 0.3); // Width and height of the rectangle
   rectMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
   rect = new THREE.Mesh(rectGeo, rectMat);
   scene.add(rect);
