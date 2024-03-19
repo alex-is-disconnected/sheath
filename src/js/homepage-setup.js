@@ -154,12 +154,12 @@ function loadHomepage () {
             button2.style.height = '43px';
             button1.style.padding = '0.5em 1em';
             button2.style.padding = '0.5em 1em';  
-          }, 1);
+          }, 400);
         
-      }, 1);
-      }, 1);
-    }, 1);
-  }, 1);
+      }, 750);
+      }, 3000);
+    }, 2000);
+  }, 2000);
 }
 
 loadHomepage();
