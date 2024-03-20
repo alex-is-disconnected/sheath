@@ -249,7 +249,7 @@ export default class AsciiEffect {
 				strChars += '<br/>';
 
 			}
-
+			oAscii.id= 'oAscii'
 			oAscii.innerHTML = `<tr><td style="display:block;width:${width}px;height:${height}px;overflow:hidden">${strChars}</td></tr>`;
 
 			// console.timeEnd('rendering');

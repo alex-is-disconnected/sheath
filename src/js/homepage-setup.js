@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import AsciiEffect from './three/AsciiEffect.js';
 import initMetaballs from "metaballs-js";
+import TypeShuffle from './util/shuffle.js';
 
 const options = {
   numMetaballs: 35,
@@ -10,7 +11,7 @@ const options = {
   color: '#000000',
   backgroundColor: '#ffffff',
   useDevicePixelRatio: true,
-  interactive: 'canvas'
+  interactive: 'window'
 }
 
 const cssSelector = '#metaballs'
@@ -31,7 +32,29 @@ let rectMat, rectGeo, rect;
 const start = Date.now();
 
 init();
+fadeInMaterial(material,3000, 6000);
 animate();
+
+function fadeInMaterial(material, duration = 2000, delay = 0) {
+  let start = null;
+
+  function step(timestamp) {
+    if (!start) start = timestamp;
+    const elapsed = timestamp - start;
+
+    if (elapsed > delay) { // Check if delay has elapsed
+      const progress = elapsed - delay;
+      const opacity = Math.min(progress / duration, 1);
+      material.opacity = opacity;
+    }
+
+    if (elapsed < duration + delay) { // Continue animation until duration + delay is reached
+      requestAnimationFrame(step);
+    }
+  }
+
+  requestAnimationFrame(step);
+}
 
 function init() {
 
@@ -45,22 +68,31 @@ function init() {
   scene = new THREE.Scene();
   scene.background = new THREE.Color( 15, 15, 15 );
 
-  material = new THREE.MeshBasicMaterial({ map: texture });
+  material = new THREE.MeshBasicMaterial({ 
+    map: texture, 
+    transparent: true,
+    opacity: 0
+  });
+
   geometry = new THREE.PlaneGeometry(1090, 700);
   mesh = new THREE.Mesh(geometry, material);
   scene.add(mesh);
 
-  rectGeo = new THREE.PlaneGeometry(205, window.innerHeight * 0.3); // Width and height of the rectangle
+  const depth = 1;
+  rectGeo = new THREE.BoxGeometry(205, window.innerHeight * 0.3, depth);
   rectMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
   rect = new THREE.Mesh(rectGeo, rectMat);
   scene.add(rect);
-  
+
+
+
 
 
   renderer = new THREE.WebGLRenderer();
   renderer.setSize( window.innerWidth, window.innerHeight );
-
-  effect = new AsciiEffect( renderer, ' .,-+|0', { invert: false } );
+  const asciiGradient = ' `^",:;Il!i><~+_-?][}{1)(|/XYUJCLQ0OZ#MW&8%B@$0';
+  const og = ' .,`ASDEFGJHGEJ-+|%890';
+  effect = new AsciiEffect( renderer, asciiGradient , { invert: false } );
   effect.setSize( window.innerWidth, window.innerHeight );
   effect.domElement.style.color = 'white';
   effect.domElement.style.backgroundColor = 'black';
@@ -79,12 +111,26 @@ function init() {
 
 function onWindowResize() {
 
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-  location.reload();
-  renderer.setSize( window.innerWidth, window.innerHeight );
-  effect.setSize( window.innerWidth, window.innerHeight );
-
+  // setTimeout(() => {
+  //   camera.aspect = window.innerWidth / window.innerHeight;
+  //   camera.updateProjectionMatrix();
+  //   // location.reload();
+  //   renderer.setSize( window.innerWidth, window.innerHeight );
+  
+  // }, 300);
+  
+  const oAsciiEl = document.getElementById('oAscii');
+  // Update renderer size
+  renderer.setSize(window.innerWidth, window.innerHeight);
+    effect.setSize( window.innerWidth, window.innerHeight );
+    oAsciiEl.innerHTML
+    // Update camera aspect ratio and projection matrix
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    
+    // Additional logic here to handle texture resizing, updating, or other adjustments
+    
+  
 }
 
 //
@@ -105,7 +151,8 @@ function render() {
 }
 
 
-
+const title = document.getElementById('cicada');
+const titleTS = new TypeShuffle(title);
 const asciiWrapper = document.getElementById('ascii-wrapper');
 const homepageWrapper = document.getElementById('homepage-wrapper');
 const button1 = document.getElementById('button1')
@@ -136,6 +183,7 @@ function loadHomepage () {
   //     }, 3000);
   //   }, 2000);
   // }, 2000);
+  titleTS.trigger('fx6')
   setTimeout(() => {    
     homepageWrapper.style.opacity = '1';
     setTimeout(() => {

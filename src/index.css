@@ -67,7 +67,7 @@ main {
 } 
 
 #ascii-wrapper {
-  opacity: 0;
+  opacity: 1;
   transition: opacity 6s cubic-bezier(0.52, 0.31, 0.25, 1.05);
 }
 
@@ -82,6 +82,7 @@ main {
   font-size: 16px;
   line-height: 1.1;
   font-family: 'JetBrains Mono';
+  text-align: center;
 }
 
 #cicada > p {
@@ -135,6 +136,11 @@ main {
 
 }
 
+table {
+  display: flex;
+  align-items: center;
+}
+
 #metaball-parent {
   margin: 0;
   position: absolute;
@@ -146,9 +152,8 @@ main {
 
 #metaballs {
   margin-top: 20px;
-  width: 69vw;
-  height: 65vh;
-  opacity: 0;
+  width: 100vw;
+  height: 100vh;
 }
 
 #intro {
@@ -624,9 +629,10 @@ button:hover {
 
 #title-bar {
   -webkit-app-region: drag;
+  position: relative;
   background: black;
   color: #fff;
-  top: 0;
+  top: 7px;
   left: 0;
   width: 100vw;
   display: flex;

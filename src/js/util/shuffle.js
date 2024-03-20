@@ -268,16 +268,15 @@ export default class TypeShuffle {
       }
     
     fx6() {
-        const MAX_CELL_ITERATIONS = 20;
+        const MAX_CELL_ITERATIONS = 60;
         let finished = 0;
         this.clearCells();
         const loop = (line, cell, iteration = 0) => {
+            cell.cache = {'state': cell.state, 'color': cell.color};
+
             if ( iteration === MAX_CELL_ITERATIONS-1 ) {
                 cell.set(cell.original);
-                cell.DOM.el.style.opacity = 0;
-                setTimeout(() => {
-                    cell.DOM.el.style.opacity = 1;
-                }, 300);
+
 
                 ++finished;
                 if ( finished === this.totalChars ) {
@@ -286,11 +285,12 @@ export default class TypeShuffle {
             }
             else {
                 cell.set(this.getRandomChar());
+                
             }
 
             ++iteration;
             if ( iteration < MAX_CELL_ITERATIONS ) {
-                setTimeout(() => loop(line, cell, iteration), 40);
+                setTimeout(() => loop(line, cell, iteration), randomNumber(30,110));
             }
         };
 
