@@ -6,7 +6,10 @@
   </head>
   <body>
     <div id="title-bar">
-      <span id="title">SHEATH</span>
+      <section id="menu-opener">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="24" width="24" id="Hierarchy-2--Streamline-Sharp"><desc>Hierarchy 2 Streamline Icon: https://streamlinehq.com</desc><g id="Hierarchy-2--Streamline-Sharp"><path id="Union" fill="#b75b42" fill-rule="evenodd" d="M15 2H9v6h2v3H3v5H1v6h6v-6H5v-3h6v3H9v6h6v-6h-2v-3h6v3h-2v6h6v-6h-2v-5h-8V8h2V2Z" clip-rule="evenodd" stroke-width="1"></path></g></svg>
+        <span id="title"> SHEATH</span>
+      </section>
       <section id="controls-container">
         <div class="window-control" id="minimize">&#8212;</div>
         <div class="window-control" id="maximize">&#9633;</div>
@@ -17,12 +20,13 @@
     <div id="homepage">
       <div id="homepage-wrapper">
         <nav id="index-nav">
-          <button id="button1" class="homepage-button button-bkg">
+          <button id="button1" class="homepage-button button-bkg trigger" data-tooltip="tooltip-sword" data-effect="effect3">
             <span class="highlight">SWORD</span>
           </button>
-          <div id="cicada">SHEATH<br> OF <br>TARSYS</div>
+          <div id="cicada">SHEATH<br> OF <br>TARSYS
+          </div>
           
-          <button id="button2" class="homepage-button button-bkg">
+          <button id="button2" class="homepage-button button-bkg trigger" data-tooltip="tooltip-shield" data-effect="effect3">
             <span class="highlight">SHIELD</span>
           </button>
         </nav>
@@ -33,6 +37,22 @@
       </div>
     </div>
 
+    <div id="tooltips">
+      <div id="tooltip-sword" class="tooltip" data-rows="6" data-cols="20">
+        <div class="tooltip__bg"></div>
+        <div class="tooltip__content">
+          <h3 class="tooltip__content-title"><span class="black-highlight">SWORD</span></h3>
+          <p class="tooltip__content-desc">Engrave information onto a tarpit </p>
+        </div>
+      </div>
+      <div id="tooltip-shield" class="tooltip" data-rows="6" data-cols="20">
+        <div class="tooltip__bg"></div>
+        <div class="tooltip__content">
+          <h3 class="tooltip__content-title"><span class="black-highlight">SHIELD</span></h3>
+          <p class="tooltip__content-desc">Read from a tarpit</p>
+        </div>
+      </div>
+    </div>
 
     <div id="sword">
       <div id="encodeContainer">
@@ -78,29 +98,45 @@
 
     <div id="shield">
       <div id="decodeContainer">
-        <div id="decodeOutput">
-          <h4 class="begin-header">[ DECOMPRESSION ]</h4>
-          <div class="begin-line"></div>
-          <div id="shield-output-wrapper">
-            <div class="output" id="decodeTextOutput">
-              <div id="hex-display"></div>
-            </div>
-            <div class="status-message" id="compression-bytes"><span class="black-highlight">SIZE: 0 bytes</span></div>
-          </div>
-          <button id="decodeButton" class="button-bkg"><span class="highlight">DECOMPRESS</span><br><span class="highlight">MESSAGE</span></button>
-          <div class="begin-line"></div>
-
-        </div>
 
         <div id="shield-container" class="">
           <h4 class="begin-header">[ READER ]</h4>
           <div class="begin-line"></div>
-          <div id="shield-reader"></div>
-          <div id="shield-card"></div>
-          <button id="readButton" class="button-bkg"><span class="highlight">READ CARD</span></button>
-          <div class="status-message" id="shield-detect-reader"><span class="black-highlight">[ READER DETECTED ]</span></div>
-          <div class="status-message" id="shield-detect-card"><span class="black-highlight">CARD DETECTED!</span></div>
-          <div class="status-message" id="shield-remove-card"><span class="black-highlight">[ CARD REMOVED ]</span></div>
+          
+          <section id="shield-reader-container">
+            <div id="shield-reader"></div>
+            <div id="shield-card"></div>
+            <button id="readButton" class="button-bkg"><span class="highlight">READ CARD</span></button>
+            <div class="status-message" id="shield-detect-reader"><span class="black-highlight">[ READER DETECTED ]</span></div>
+            <div class="status-message" id="shield-detect-card"><span class="black-highlight">CARD DETECTED!</span></div>
+            <div class="status-message" id="shield-remove-card"><span class="black-highlight">[ CARD REMOVED ]</span></div>
+            <div id="decompression">
+              <h4 class="begin-header">[ DECOMPRESSION ]</h4>
+              <div class="begin-line"></div>
+              <button id="decodeButton" class="button-bkg"><span class="highlight">DECOMPRESS</span><br><span class="highlight">MESSAGE</span></button>
+              <div class="begin-line"></div>
+    
+            </div>
+          </section>
+        </div>
+
+        <div id="decodeOutput">
+          <h4 class="begin-header">[ OUTPUT ]</h4>
+          <div class="begin-line"></div>
+          <div id="shield-output-wrapper">
+            <div class="output" id="decodeTextOutput">
+              <div id="hex-display">
+                <div id="offset"></div>
+                <div id="hex-data"></div>
+                <div id="close-hex">
+                  <div id="close-inner-arrow">🢐</div>
+                </div>
+                <div id="ascii-rep"></div>
+              </div>
+            </div>
+          </div>
+          <div class="begin-line"></div>
+
         </div>
 
       </div>

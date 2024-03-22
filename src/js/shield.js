@@ -21,9 +21,6 @@ for (let i = 1; i <= 108; i++) {
   shieldCard.innerText += '▒';
   shieldReader.innerText += '░';
   
-  // if (i % 10 === 0) {
-    //   shieldCard.innerHTML += '<br>';
-    // }
   }
   
 const shieldCardTS = new TypeShuffle(shieldCard);

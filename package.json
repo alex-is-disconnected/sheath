@@ -35,6 +35,7 @@
   "license": "MIT",
   "dependencies": {
     "electron-squirrel-startup": "^1.0.0",
+    "gsap": "^3.12.5",
     "metaballs-js": "^2.0.0",
     "nfc-pcsc": "^0.8.1",
     "splitting": "^1.0.6",

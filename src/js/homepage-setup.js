@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import AsciiEffect from './three/AsciiEffect.js';
 import initMetaballs from "metaballs-js";
 import TypeShuffle from './util/shuffle.js';
+import './create-tooltip.js';
 
 const options = {
   numMetaballs: 35,
@@ -158,32 +159,11 @@ const homepageWrapper = document.getElementById('homepage-wrapper');
 const button1 = document.getElementById('button1')
 const button2 = document.getElementById('button2')
 
+const fastSetting = false;
 function loadHomepage () {
-  // setTimeout(() => {    
-  //   homepageWrapper.style.opacity = '1';
-  //   setTimeout(() => {
-  //     asciiWrapper.style.opacity = '1';
-  //     setTimeout(() => {
-  //       button1.style.borderWidth = '3px';
-  //       button2.style.borderWidth = '3px';
-  //       setTimeout(() => {   
-  
-  //         button1.style.width = '110px';
-  //         button2.style.width = '110px';
-  //         // button1.style.padding = '0.5em 0';
-  //         // button2.style.padding = '0.5em 0';
-  //         setTimeout(() => {
-  //           button1.style.height = '43px';
-  //           button2.style.height = '43px';
-  //           button1.style.padding = '0.5em 1em';
-  //           button2.style.padding = '0.5em 1em';  
-  //         }, 400);
-        
-  //     }, 750);
-  //     }, 3000);
-  //   }, 2000);
-  // }, 2000);
-  titleTS.trigger('fx6')
+  if (fastSetting === false) {
+    titleTS.trigger('fx6')
+
   setTimeout(() => {    
     homepageWrapper.style.opacity = '1';
     setTimeout(() => {
@@ -208,6 +188,33 @@ function loadHomepage () {
       }, 3000);
     }, 2000);
   }, 2000);
+  } else {
+  titleTS.trigger('fx6')
+  setTimeout(() => {    
+    homepageWrapper.style.opacity = '1';
+    setTimeout(() => {
+      asciiWrapper.style.opacity = '1';
+      setTimeout(() => {
+        button1.style.borderWidth = '3px';
+        button2.style.borderWidth = '3px';
+        setTimeout(() => {   
+  
+          button1.style.width = '110px';
+          button2.style.width = '110px';
+          // button1.style.padding = '0.5em 0';
+          // button2.style.padding = '0.5em 0';
+          setTimeout(() => {
+            button1.style.height = '43px';
+            button2.style.height = '43px';
+            button1.style.padding = '0.5em 1em';
+            button2.style.padding = '0.5em 1em';  
+          }, 1);
+        
+      }, 1);
+      }, 1);
+    }, 1);
+  }, 1);
+}
 }
 
 loadHomepage();

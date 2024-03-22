@@ -30,9 +30,6 @@ for (let i = 1; i <= 108; i++) {
   swordCard.innerText += '▒';
   swordReader.innerText += '░';
   
-  // if (i % 10 === 0) {
-    //   swordCard.innerHTML += '<br>';
-    // }
   }
   
 const readerTS = new TypeShuffle(swordReader);
