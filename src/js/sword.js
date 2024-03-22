@@ -50,6 +50,30 @@ window.NFC.onCardDetected((event, data) => {
   swordDetectedReader.style.display = 'none';
 })
 
+document.addEventListener('keyup', function(event) {
+  if (event.key === 'h' || event.key === 'H') {
+    swordDetectedCard.style.display = 'block';
+    swordRemovedCard.style.display = 'none';
+  
+    writeBtn.style.opacity = 1;
+    swordCardTS.trigger('reader');
+    swordDetectedTS.trigger('fx6');
+    swordDetectedReader.style.display = 'none';
+  }
+});
+
+document.addEventListener('keyup', function(event) {
+  if (event.key === 'k' || event.key === 'K') {
+    swordRemovedCard.style.display = 'block';
+    swordDetectedCard.style.display = 'none';
+  
+    swordCardTS.trigger('clear-reader');
+    writeBtn.style.opacity = 0;
+    swordRemovedTS.trigger('fx6');
+    swordDetectedReader.style.display = 'none';
+  }
+});
+
 window.NFC.onCardRemoved((event, data) => {
   swordRemovedCard.style.display = 'block';
   swordDetectedCard.style.display = 'none';
