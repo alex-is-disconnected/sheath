@@ -103,6 +103,7 @@ window.NFC.onReaderConnected((event, data) => {
   swordDetectReaderTS.trigger('fx6');
 })
 
+const openSwordDetectReaderTS = new TypeShuffle(swordDetectedReader)
 swordBtn.addEventListener('click', () => {
   swordParent.style.display = 'block'
   // window.NFC.getReader().then((data) => {
@@ -112,14 +113,18 @@ swordBtn.addEventListener('click', () => {
     // <span class="black-highlight">READER DETECTED:</span><br><br>
     // <span class="black-highlight"> ${readerJSON.reader.name}</span>
     // `
-    const swordDetectReaderTS = new TypeShuffle(swordDetectedReader)
-    swordDetectReaderTS.clearCells();
+    openSwordDetectReaderTS.clearCells();
     setTimeout(() => {
       
-      swordDetectReaderTS.trigger('fx6')
+      openSwordDetectReaderTS.trigger('fx6')
     }, 500);
   // });
 })
+
+function closeSword () {
+  swordParent.style.display = 'none';
+  swordDetectedReader.style.display = 'none';
+}
 
 encodeTextArea.addEventListener("input", function(event) {
   const value = encodeTextArea.value;

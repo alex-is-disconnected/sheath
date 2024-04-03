@@ -743,7 +743,29 @@ button:hover {
   background-color: darkred;
 }
 
-.card-read > h2 {
-  color: green;
+#net-map {
+  -webkit-app-region: no-drag;
+  transform: rotate(270deg);
+  cursor: pointer;
 }
 
+#net-map:hover {
+  background-color:  #292828;
+}
+
+#app-nav {
+  width: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  top: 10px; 
+  left: 10px;
+  z-index: 30;
+  overflow: hidden;
+  background-color: orange;
+}
+
+.wide-nav {
+  width: 20vw !important;
+}
