@@ -114,6 +114,34 @@ shieldBtn.addEventListener('click', () => {
   // });
 })
 
+const shieldNav = document.getElementById('shield-nav');
+shieldNav.addEventListener('click', openShield);
+
+function openShield () {
+  shieldParent.style.display = 'block';
+  shieldDetectedReader.style.display = 'block';
+
+  const swordParent = document.getElementById('sword');
+  const swordDetectedReader = document.getElementById('sword-detect-reader');
+
+  swordParent.style.display = 'none';
+  swordDetectedReader.style.display = 'none';
+}
+
+const homeNav = document.getElementById('home-nav');
+homeNav.addEventListener('click', closeToHome);
+
+function closeToHome () {
+  shieldParent.style.display = 'none';
+  shieldDetectedReader.style.display = 'none';
+
+  const swordParent = document.getElementById('sword');
+  const swordDetectedReader = document.getElementById('sword-detect-reader');
+
+  swordParent.style.display = 'none';
+  swordDetectedReader.style.display = 'none';
+}
+
 
 function performRead() {
   console.log('reading!')

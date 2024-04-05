@@ -121,9 +121,18 @@ swordBtn.addEventListener('click', () => {
   // });
 })
 
-function closeSword () {
-  swordParent.style.display = 'none';
-  swordDetectedReader.style.display = 'none';
+const swordNav = document.getElementById('sword-nav');
+swordNav.addEventListener('click', openSword);
+
+function openSword () {
+  swordParent.style.display = 'block';
+  swordDetectedReader.style.display = 'block';
+
+  const shieldParent = document.getElementById('shield');
+  const shieldDetectedReader = document.getElementById('shield-detect-reader');
+
+  shieldParent.style.display = 'none';
+  shieldDetectedReader.style.display = 'none';
 }
 
 encodeTextArea.addEventListener("input", function(event) {

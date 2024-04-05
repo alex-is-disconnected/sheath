@@ -747,6 +747,11 @@ button:hover {
   -webkit-app-region: no-drag;
   transform: rotate(270deg);
   cursor: pointer;
+  box-shadow: inset 0px 0px 0px 2px var(--ui-main-color);
+  padding: 4px 4px 2px 4px;
+  border-radius: 4px;
+  margin-right: 4px;
+  transition: all 1s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 #net-map:hover {
@@ -754,18 +759,43 @@ button:hover {
 }
 
 #app-nav {
-  width: 0px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  width: fit-content;
+  height: 0;
   position: absolute;
-  top: 10px; 
+  top: 45px; 
   left: 10px;
   z-index: 30;
   overflow: hidden;
-  background-color: orange;
+  background-color: var(--ui-bkg-color);
+  opacity: 1;
+  background-size: 7px 7px;
+  background-image: repeating-linear-gradient(45deg, var(--ui-main-color) 0, var(--ui-main-color) 0.7000000000000001px, var(--ui-bkg-color) 0, var(--ui-bkg-color) 50%);
+  text-align: center;
+  border: var(--ui-bkg-color) 1px solid;
+  color: #b86243;
+  font-weight: 700;
+  transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+#inner-area {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: var(--ui-bkg-color);
+  margin: .5em;
+  gap: 1em;
+  padding: 1em;
+  height: calc(100% - 3em);
+}
+
+#inner-area > button {
+  margin: 0;
+  max-width: 130px;
 }
 
 .wide-nav {
-  width: 20vw !important;
+  height: 32vh !important;
+  border: var(--ui-main-color) 1px solid !important;
+
+
 }
