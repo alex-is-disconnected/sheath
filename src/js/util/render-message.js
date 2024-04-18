@@ -65,8 +65,6 @@
 // };
 
 export default async function renderMessage(hexData) {
-  console.log(hexData);
-
   function byteToHex(byte) {
     return byte.toString(16).padStart(2, "0");
   }

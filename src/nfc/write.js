@@ -84,7 +84,6 @@ nfc.on("reader", async (reader) => {
   ];
 
   reader.on("card", async (card) => {
-    console.log(`card detected`, reader, card);
 
     const selectApplication = async () => {
       // 1: [0x5A] SelectApplication(appId) [4 bytes] - Selects one specific application for further access
@@ -196,11 +195,11 @@ nfc.on("reader", async (reader) => {
       return result;
     }
 
-    const writeData = async () => {
+    const writeData = async (message) => {
       // 3: [0xBD] ReadData(FileNo,Offset,Length) [8bytes] - Reads data from Standard Data Files or Backup Data Files
       // const res = await send(wrap(0xad, [desfire.read.fileId, ...desfire.read.offset, ...desfire.read.length]), 'step 3 - read', 400);
-      const message = `A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the cha`      
-      const chunkedMsg = chunkString(message);
+      const messageToWrite = message
+      const chunkedMsg = chunkString(messageToWrite);
       for (let i = 0; i < chunkedMsg.length; i++) {
         const currentMsg = chunkedMsg[i];
         let currentOffset = i * chunkLength;

@@ -159,7 +159,7 @@ const homepageWrapper = document.getElementById('homepage-wrapper');
 const button1 = document.getElementById('button1')
 const button2 = document.getElementById('button2')
 
-const fastSetting = false;
+const fastSetting = true;
 function loadHomepage () {
   if (fastSetting === false) {
     titleTS.trigger('fx6')

@@ -13,4 +13,6 @@ contextBridge.exposeInMainWorld('NFC', {
   onReaderConnected: (callback) => ipcRenderer.on('reader-connected', (_event, data) => callback(data)),
   onCardDetected: (callback) => ipcRenderer.on('card-detected', callback),
   onCardRemoved: (callback) => ipcRenderer.on('card-removed', callback),
+  writeInfo: (message) => ipcRenderer.send('write-info', message),
+  readInfo: (args) => ipcRenderer.invoke('operation-read', args)
 })

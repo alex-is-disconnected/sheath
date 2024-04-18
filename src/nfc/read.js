@@ -83,7 +83,6 @@ nfc.on("reader", async (reader) => {
   ];
 
   reader.on("card", async (card) => {
-    console.log(`card detected`, reader, card);
 
     const selectApplication = async () => {
       // 1: [0x5A] SelectApplication(appId) [4 bytes] - Selects one specific application for further access

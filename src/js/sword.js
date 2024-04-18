@@ -50,6 +50,13 @@ window.NFC.onCardDetected((event, data) => {
   swordDetectedReader.style.display = 'none';
 })
 
+writeBtn.addEventListener('click', () => {
+  const messageToWrite = encodeTextArea.innerHTML;
+  console.log('click')
+  window.NFC.writeInfo(messageToWrite)
+})
+
+
 document.addEventListener('keyup', function(event) {
   if (event.key === 'h' || event.key === 'H') {
     swordDetectedCard.style.display = 'block';
