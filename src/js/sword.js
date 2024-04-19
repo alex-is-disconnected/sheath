@@ -15,6 +15,7 @@ const textAreaBytes = document.getElementById("textarea-bytes");
 const compressionBytes = document.getElementById("compression-bytes");
 
 const writeBtn = document.getElementById('writeButton');
+const writeCompressedBtn = document.getElementById('writeCompressedButton');
 
 const swordDetectedReader = document.getElementById('sword-detect-reader');
 const swordDetectedCard = document.getElementById('sword-detect-card');
@@ -45,6 +46,7 @@ window.NFC.onCardDetected((event, data) => {
   swordRemovedCard.style.display = 'none';
 
   writeBtn.style.opacity = 1;
+  writeCompressedBtn.style.opacity = 1;
   swordCardTS.trigger('reader');
   swordDetectedTS.trigger('fx6');
   swordDetectedReader.style.display = 'none';
@@ -52,8 +54,15 @@ window.NFC.onCardDetected((event, data) => {
 
 writeBtn.addEventListener('click', () => {
   const messageToWrite = encodeTextArea.innerHTML;
-  console.log('click')
   window.NFC.writeInfo(messageToWrite)
+})
+
+
+writeCompressedBtn.addEventListener('click', () => {
+  const inputText = encodeTextArea.value;
+  const lzwEncodeOutput = lzw_encode(inputText);
+  const encodedHexOuput = lzwEncodeOutput.hex;
+  window.NFC.writeInfo(encodedHexOuput)
 })
 
 
@@ -63,6 +72,7 @@ document.addEventListener('keyup', function(event) {
     swordRemovedCard.style.display = 'none';
   
     writeBtn.style.opacity = 1;
+    writeCompressedBtn.style.opacity = 1;
     swordCardTS.trigger('reader');
     swordDetectedTS.trigger('fx6');
     swordDetectedReader.style.display = 'none';
@@ -76,6 +86,7 @@ document.addEventListener('keyup', function(event) {
   
     swordCardTS.trigger('clear-reader');
     writeBtn.style.opacity = 0;
+    writeCompressedBtn.style.opacity = 0;
     swordRemovedTS.trigger('fx6');
     swordDetectedReader.style.display = 'none';
   }
@@ -87,6 +98,7 @@ window.NFC.onCardRemoved((event, data) => {
 
   swordCardTS.trigger('clear-reader');
   writeBtn.style.opacity = 0;
+  writeCompressedBtn.style.opacity = 0;
   swordRemovedTS.trigger('fx6');
   swordDetectedReader.style.display = 'none';
 })
@@ -178,21 +190,21 @@ function performEncode() {
   encodeTextArea.style.cursor = 'progress';
   const inputText = encodeTextArea.value;
   const lzwEncodeOutput = lzw_encode(inputText);
-  const encodeedHexOuput = lzwEncodeOutput.hex;
+  const encodedHexOuput = lzwEncodeOutput.hex;
   console.log(lzwEncodeOutput)
   let animCycleTracker = 0;
   const main = setInterval(() => {
-    if (animCycleTracker <= encodeedHexOuput.length) {
+    if (animCycleTracker <= encodedHexOuput.length) {
     compressionBytes.innerHTML = `
     <span class="black-highlight">SIZE: ${animCycleTracker} bytes</span>
     `
-    encodeTextOutput.innerHTML += encodeedHexOuput[encodeedHexOuput.length - animCycleTracker - 1] + '&nbsp;';
-      if ( animCycleTracker < encodeedHexOuput.length - 30) {
+    encodeTextOutput.innerHTML += encodedHexOuput[encodedHexOuput.length - animCycleTracker - 1] + '&nbsp;';
+      if ( animCycleTracker < encodedHexOuput.length - 30) {
         animCycleTracker += 10;
       } else {
         animCycleTracker += 1;
       }
-    } if (animCycleTracker === encodeedHexOuput.length + 1) {
+    } if (animCycleTracker === encodedHexOuput.length + 1) {
       clearInterval(main);
       encodeTextArea.removeAttribute("readonly");
       encodeTextArea.style.cursor = 'text';
@@ -201,7 +213,7 @@ function performEncode() {
       compressionProgress.innerText = 'COMPLETE!';
       compressionCalc.style.display = 'block';
       const textAreaBytes = calculateBytes(encodeTextArea.value);
-      const compressionBytes = encodeedHexOuput.length
+      const compressionBytes = encodedHexOuput.length
       console.log(Math.round(compressionBytes/textAreaBytes * 10000) / 100)
       compressionCalc.innerHTML = 
       `

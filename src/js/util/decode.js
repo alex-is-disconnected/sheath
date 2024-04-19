@@ -12,34 +12,32 @@ function stringToHexArray(str) {
 }
 
 // Decompress an LZW-encoded string
-export default function lzw_decode(s) {
-  const dict = {};
-  const data = (s + "").split("");
-  let currChar = data[0];
-  let oldPhrase = currChar;
-  const out = [currChar];
+export default function lzw_decode(compressed) {
+  // Building the dictionary.
+  let dict = {};
+  let data = (compressed + "").split("");
+  let currentChar = data[0];
+  let oldPhrase = currentChar;
+  let out = [currentChar];
   let code = 256;
   let phrase;
-  for (let i=1; i<data.length; i++) {
-      const currCode = data[i].charCodeAt(0);
+
+  for (let i = 1; i < data.length; i++) {
+      let currCode = data[i].charCodeAt(0);
       if (currCode < 256) {
           phrase = data[i];
-      }
-      else {
-        phrase = dict[currCode] ? dict[currCode] : (oldPhrase + currChar);
+      } else {
+          phrase = dict[currCode] ? dict[currCode] : (oldPhrase + currentChar);
       }
       out.push(phrase);
-      currChar = phrase.charAt(0);
-      dict[code] = oldPhrase + currChar;
+      currentChar = phrase.charAt(0);
+      dict[code] = oldPhrase + currentChar;
       code++;
       oldPhrase = phrase;
   }
-  out.push(phrase.length > 1 ? dict[phrase] : phrase.charCodeAt(0));
-  let animCycle = []
-  for (let i=0; i<out.length; i++) {
-    out[i] = String.fromCharCode(out[i]);
-    // animCycle.push(out.join(''));
+
+  return {
+    string: out.join(""),
+    hex:stringToHexArray(out.join(""))
   }
-  const hex = stringToHexArray(out.join(''))
-  return {string:out, hex:hex };
 }
