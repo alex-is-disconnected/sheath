@@ -248,7 +248,7 @@ async function writeData (message) {
         ...desfire.read.length,
         ...currentMsgBuffer
       ]),
-      "step 3 - read",
+      "step 3 - write",
       400
     );
     const res2 = await send(
@@ -258,7 +258,7 @@ async function writeData (message) {
         ...desfire.read.length,
         ...currentMsgBuffer
       ]),
-      "step 3 - read",
+      "step 3 - write",
       400
     );
     console.log('response', res)
